@@ -1,14 +1,14 @@
 {
   "users": [
     {
-      "email": "test1@mail.ru",
-      "password": "123456",
-      "name": "test1",
-      "id": 1
+      "id": 1,
+      "email": "wfm@mail.ru",
+      "password": "12345678",
+      "name": "Администратор"
     }
   ],
   "bill": {
-    "value": 86218,
+    "value": 100000,
     "currency": "RUB"
   },
   "categories": [
@@ -19,18 +19,13 @@
     },
     {
       "name": "Еда",
-      "capacity": 16000,
+      "capacity": 10000,
       "id": 2
     },
     {
       "id": 3,
       "name": "Машина",
       "capacity": 7000
-    },
-    {
-      "name": "test2",
-      "capacity": 1516,
-      "id": 4
     }
   ],
   "events": [
