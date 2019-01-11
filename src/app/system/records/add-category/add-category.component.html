@@ -1,0 +1,51 @@
+<div class="card-header bordered">
+  <div class="header-block">
+    <h3 class="title">Добавить категорию</h3>
+  </div>
+</div>
+<div class="card-block">
+  <form [formGroup]="form"
+        (ngSubmit)="addedCategories()">
+    <div class="form-group"
+         [ngClass]="{'has-error': form.get('name').invalid && form.get('name').touched}">
+      <label class="control-label"
+             for="category-name">
+        Введите название
+      </label>
+      <input type="text"
+             id="category-name"
+             name="name"
+             class="form-control"
+             formControlName="name"
+        >
+      <span class="form-help-text"
+            *ngIf="form.get('name').invalid && form.get('name').touched">
+        Поле должно быть заполнено!
+      </span>
+    </div>
+    <div class="form-group"
+         [ngClass]="{'has-error': form.get('capacity').invalid && form.get('capacity').touched}">
+      <label class="control-label"
+             for="category-value">
+        Введите лимит
+      </label>
+      <input type="number"
+             required
+             name="capacity"
+             id="category-value"
+             class="form-control"
+             formControlName="capacity" >
+      <!--todo доделать вывод ошибки с учетом ввода отрицательного значения-->
+      <span class="form-help-text"
+            *ngIf="form.get('capacity').invalid && form.get('capacity').touched">
+        Поле должно быть заполнено!
+      </span>
+    </div>
+    <button type="submit"
+            class="btn btn-primary"
+            [disabled]="form.invalid && form.touched"
+            >
+      Добавить
+    </button>
+  </form>
+</div>

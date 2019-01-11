@@ -26,11 +26,6 @@
       "id": 3,
       "name": "Машина",
       "capacity": 7000
-    },
-    {
-      "name": "test2",
-      "capacity": 1516,
-      "id": 4
     }
   ],
   "events": [

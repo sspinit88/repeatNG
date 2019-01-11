@@ -7,8 +7,12 @@ import {HistoryComponent} from './history/history.component';
 import {BillComponent} from './bill/bill.component';
 import {PlaningComponent} from './planing/planing.component';
 import {RecordsComponent} from './records/records.component';
-import { HeaderComponent } from './shared/components/header/header.component';
-import { SidebarComponent } from './shared/components/sidebar/sidebar.component';
+import {HeaderComponent} from './shared/components/header/header.component';
+import {SidebarComponent} from './shared/components/sidebar/sidebar.component';
+import {AddCategoryComponent} from './records/add-category/add-category.component';
+import {AddEventComponent} from './records/add-event/add-event.component';
+import {EditCategoryComponent} from './records/edit-category/edit-category.component';
+import {CategoriesService} from './shared/services/categories.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,10 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
     PlaningComponent,
     RecordsComponent,
     HeaderComponent,
-    SidebarComponent
+    SidebarComponent,
+    AddCategoryComponent,
+    AddEventComponent,
+    EditCategoryComponent
   ],
   imports: [
     SharedModule,
@@ -26,7 +33,7 @@ import { SidebarComponent } from './shared/components/sidebar/sidebar.component'
     SystemRoutingModule
   ],
   exports: [],
-  providers: []
+  providers: [CategoriesService]
 })
 
 export class SystemModule {
