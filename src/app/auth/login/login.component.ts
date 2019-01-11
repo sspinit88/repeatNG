@@ -3,6 +3,8 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../../shared/services/auth.service';
 import {UserModel} from '../../shared/models/user.model';
 import {MessageModel} from '../../shared/models/message.model';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -16,6 +18,7 @@ export class LoginComponent implements OnInit {
 
   constructor(
       private authService: AuthService,
+      private router: Router
   ) {
   }
 
@@ -44,6 +47,7 @@ export class LoginComponent implements OnInit {
             if (user.password === formData.password) {
               this.message.text = '';
               this.showMessage('success', 'Здравствуйте!');
+              this.router.navigate(['system', 'bill']);
             } else {
               this.showMessage('danger', 'Введен неверный пароль!');
             }
