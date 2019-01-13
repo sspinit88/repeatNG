@@ -1,6 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {CategoriesService} from '../../shared/services/categories.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {CategoriesModel} from '../../../shared/models/categories.model';
 
 @Component({
   selector: 'app-add-category',
@@ -11,9 +12,10 @@ export class AddCategoryComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(
-      private categoriesService: CategoriesService
-  ) {
+  @Output()
+    setNewCapacity = new EventEmitter();
+
+  constructor(private categoriesService: CategoriesService) {
   }
 
   ngOnInit() {
@@ -23,16 +25,23 @@ export class AddCategoryComponent implements OnInit {
           [Validators.required]
       ),
       'capacity': new FormControl(
-          '1', [Validators.required, Validators.min(1)]
+          '1000', [Validators.required, Validators.min(1)]
       )
     });
   }
 
   addedCategories() {
-    console.log(this.form.value);
+    const {name, capacity} = this.form.value;
+
+    const newCategory = new CategoriesModel(name, capacity);
+
+    this.categoriesService.addCategory(newCategory)
+        .subscribe((response: CategoriesModel) => {
+          this.form.reset();
+          this.form.patchValue({capacity: 1000});
+          this.setNewCapacity.emit(response);
+        });
   }
-
-
 }
 
 

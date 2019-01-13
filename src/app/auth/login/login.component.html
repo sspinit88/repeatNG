@@ -2,7 +2,8 @@
   Войдите для работы
 </p>
 <div class="alert text-center alert-{{message.type}}"
-     *ngIf="message.text">
+     *ngIf="message.text"
+     @fade>
   {{message.text}}
 </div>
 <form [formGroup]="form"

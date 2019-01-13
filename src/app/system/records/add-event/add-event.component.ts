@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {CategoriesModel} from '../../../shared/models/categories.model';
+import {FormControl, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-add-event',
@@ -7,9 +9,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddEventComponent implements OnInit {
 
-  constructor() { }
+  form: FormGroup;
+
+  // todo доделать страницу
+
+  @Input()
+  categories: CategoriesModel[] = [];
+
+  constructor() {
+  }
 
   ngOnInit() {
+    this.form = new FormGroup({
+      'amount': new FormControl(
+          '1000', [Validators.required, Validators.min(1)]
+      )
+    });
+  }
+
+  addEvent() {
+
   }
 
 }

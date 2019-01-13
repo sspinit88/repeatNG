@@ -14,18 +14,23 @@
   "categories": [
     {
       "name": "Дом",
-      "capacity": 15000,
+      "capacity": 153512,
       "id": 1
     },
     {
       "name": "Еда",
-      "capacity": 16000,
+      "capacity": 15000,
       "id": 2
     },
     {
       "id": 3,
       "name": "Машина",
       "capacity": 7000
+    },
+    {
+      "name": "test1",
+      "capacity": 10654,
+      "id": 4
     }
   ],
   "events": [

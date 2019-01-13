@@ -5,27 +5,33 @@
     </h3>
   </div>
 
-  <section class="section">
-
+  <section class="section"
+           *ngIf="isLoaded">
     <div class="row">
       <div class="col-md-6">
         <div class="card">
-          <app-add-event></app-add-event>
+          <app-add-event [categories]="categories"></app-add-event>
         </div>
       </div>
 
       <div class="col-md-6">
         <div class="card">
-         <app-add-category></app-add-category>
+         <app-add-category (setNewCapacity)="newCategoryAdded($event)"></app-add-category>
         </div>
       </div>
 
       <div class="col-md-12">
         <div class="card">
-          <app-edit-category></app-edit-category>
+          <app-edit-category [categories]="categories"
+                             (edc)="categoriesEdited($event)">
+          </app-edit-category>
         </div>
       </div>
     </div>
 
+  </section>
+  <section class="section"
+           *ngIf="!isLoaded">
+    Loading...
   </section>
 </article>

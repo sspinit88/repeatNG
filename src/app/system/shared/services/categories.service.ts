@@ -7,16 +7,31 @@ import {map} from 'rxjs/operators';
 @Injectable()
 
 export class CategoriesService {
-  constructor(
-      private http: HttpClient
-  ) {
+  constructor(private http: HttpClient) {
   }
 
   addCategory(category: CategoriesModel): Observable<any> {
     return this.http.post(`http://localhost:3004/categories`, category)
         .pipe(
             map(response => {
-              console.log(response);
+              return response;
+            })
+        );
+  }
+
+  getCategories(): Observable<any> {
+    return this.http.get(`http://localhost:3004/categories`)
+        .pipe(
+            map(response => {
+              return response;
+            })
+        );
+  }
+
+  editCategory(category: CategoriesModel): Observable<any> {
+    return this.http.put(`http://localhost:3004/categories/${category.id}`, category)
+        .pipe(
+            map(response => {
               return response;
             })
         );

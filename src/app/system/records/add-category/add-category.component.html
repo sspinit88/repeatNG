@@ -34,16 +34,23 @@
              name="capacity"
              id="category-value"
              class="form-control"
+             #capacity
              formControlName="capacity" >
-      <!--todo доделать вывод ошибки с учетом ввода отрицательного значения-->
       <span class="form-help-text"
             *ngIf="form.get('capacity').invalid && form.get('capacity').touched">
-        Поле должно быть заполнено!
+        <span *ngIf="form.get('capacity')['errors']['required']">
+          Поле должно быть заполнено!
+        </span>
+        <span *ngIf="form.get('capacity')['errors']['min']">
+          Введенный лимит не должен быть меньше: {{form.get('capacity')['errors']['min']['min']}}
+          <br>
+          Введено: {{form.get('capacity')['errors']['min']['actual']}}
+        </span>
       </span>
     </div>
     <button type="submit"
             class="btn btn-primary"
-            [disabled]="form.invalid && form.touched"
+            [disabled]="form.invalid"
             >
       Добавить
     </button>

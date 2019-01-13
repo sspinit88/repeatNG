@@ -1,36 +1,50 @@
 <div class="card-header bordered">
   <div class="header-block">
     <h3 class="title">Редактировать категорию</h3>
+    <div class="alert text-center alert-{{message.type}} mt-2"
+         *ngIf="message.text">
+      {{message.text}}
+    </div>
   </div>
 </div>
 <div class="card-block">
-  <form>
+  <form [formGroup]="form"
+        (ngSubmit)="editCategory()">
     <div class="form-group">
       <label class="control-label"
              for="category-name-2">
         Выберите категорию для редактирования
       </label>
       <select class="form-control"
-              id="category-name-2">
-        <option>Option one</option>
-        <option>Option two</option>
-        <option>Option three</option>
-        <option>Option four</option>
+              id="category-name-2"
+              [(ngModel)]="currentCategoryId"
+              (change)="onCategoryChange()"
+              [ngModelOptions]="{standalone: true}">
+        <option *ngFor="let category of categories"
+                [value]="category.id">
+          {{category.name}}
+        </option>
       </select>
     </div>
-    <div class="form-group has-success">
+    <div class="form-group"
+         [ngClass]="{'has-error': form.get('name').invalid && form.get('name').touched}">
       <label class="control-label"
              for="category-value">
         Введите новое название
       </label>
       <input type="text"
              id="category-value"
-             class="form-control">
-      <span class="form-help-text">
-        Валидация нет ошибки
+             class="form-control"
+             formControlName="name"
+             [ngModel]="currentCategory.name"
+      >
+      <span class="form-help-text"
+            *ngIf="form.get('name').invalid && form.get('name').touched">
+          Поле должно быть заполнено!
       </span>
     </div>
-    <div class="form-group has-success">
+    <div class="form-group"
+         [ngClass]="{'has-error': form.get('capacity').invalid && form.get('capacity').touched}">
       <label class="control-label"
              for="category-value-2">
         Введите лимит
@@ -38,14 +52,26 @@
       <input type="number"
              value="0"
              id="category-value-2"
-             class="form-control">
-      <span class="form-help-text">
-        Валидация нет ошибки
+             class="form-control"
+             formControlName="capacity"
+             [ngModel]="currentCategory.capacity"
+             >
+      <span class="form-help-text"
+            *ngIf="form.get('capacity').invalid && form.get('capacity').touched">
+        <span *ngIf="form.get('capacity')['errors']['required']">
+          Поле должно быть заполнено!
+        </span>
+        <span *ngIf="form.get('capacity')['errors']['min']">
+          Введенный лимит не должен быть меньше: {{form.get('capacity')['errors']['min']['min']}}
+          <br>
+          Введено: {{form.get('capacity')['errors']['min']['actual']}}
+        </span>
       </span>
     </div>
     <button type="submit"
-            class="btn btn-primary">
-      Добавить
+            class="btn btn-primary"
+            [disabled]="form.invalid">
+      Редактировать
     </button>
   </form>
 </div>
